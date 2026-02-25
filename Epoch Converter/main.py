@@ -11,7 +11,7 @@ def convert():
     date_time = datetime.datetime.fromtimestamp(unix_timestamp)
     print("The corresponding date and time is:", date_time)
     print("ISO 8601 format:", date_time.isoformat())
-    
+
 def print_current_timestamp_every_second():
     """Prints the current Unix timestamp every second."""
     try:
@@ -21,18 +21,43 @@ def print_current_timestamp_every_second():
     except KeyboardInterrupt:
         print("Stopped printing timestamps.")
 
+def print_current_timestamp_every_second_with_iso_time():
+    """Prints the current Unix timestamp and ISO 8601 time every second."""
+    try:
+        while True:
+            current_time = datetime.datetime.now()
+            print(f"Current Unix timestamp: {current_time.timestamp()} | "
+                  f"ISO 8601 time: {current_time.isoformat()}")
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Stopped printing timestamps.")
+
 def main():
     """Entry point of the script."""
-    if input("Do you want to convert a Unix timestamp? (yes/no): ").lower() == "yes":
+    menu = (
+        "1) Convert a Unix timestamp\n"
+        "2) Show current Unix timestamp\n"
+        "3) Show current date and time\n"
+        "4) Show current date and time (ISO 8601)\n"
+        "5) Print current Unix timestamp every second\n"
+        "6) Print current Unix timestamp and ISO 8601 time every second\n"
+    )
+    print("Choose an action:")
+    print(menu)
+    choice = input("Enter 1-6 (or anything else to exit): ").strip()
+
+    if choice == "1":
         convert()
-    elif input("Do you want to see the current Unix timestamp? (yes/no): ").lower() == "yes":
+    elif choice == "2":
         print(f"Current Unix timestamp: {datetime.datetime.now().timestamp()}")
-    elif input("Do you want to see the current date and time? (yes/no): ").lower() == "yes":
+    elif choice == "3":
         print(f"Current date and time: {datetime.datetime.now()}")
-    elif input("Do you want to see the current date and time in ISO 8601 format? (yes/no): ").lower() == "yes":
+    elif choice == "4":
         print(f"Current date and time in ISO 8601 format: {datetime.datetime.now().isoformat()}")
-    elif input("Do you want to have the current Unix timestamp print in the terminal every second? (yes/no): ").lower() == "yes":
+    elif choice == "5":
         print_current_timestamp_every_second()
+    elif choice == "6":
+        print_current_timestamp_every_second_with_iso_time()
     else:
         print("No valid option selected. Exiting the program.")
 
